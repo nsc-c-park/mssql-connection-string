@@ -1,0 +1,30 @@
+{
+  "name": "mssql-connection-string",
+  "version": "0.0.1",
+  "description": "Module to parse MS SQL Server connection string",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nsc-c-park/mssql-connection-string.git"
+  },
+  "keywords": [
+    "mssql",
+    "knex",
+    "booshelf",
+    "connection",
+    "string"
+  ],
+  "author": "Jacek Czastkiewicz <jc@archlab.pl> (https://github.com/jczas)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nsc-c-park/mssql-connection-string/issues"
+  },
+  "homepage": "https://github.com/nsc-c-park/mssql-connection-string#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
