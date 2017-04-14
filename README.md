@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/nsc-c-park/mssql-connection-string.svg?branch=master)](https://travis-ci.org/nsc-c-park/mssql-connection-string)
+[![Coverage Status](https://coveralls.io/repos/github/nsc-c-park/mssql-connection-string/badge.svg?branch=master)](https://coveralls.io/github/nsc-c-park/mssql-connection-string?branch=master)
+
 Number Formatter
 =========
 
