@@ -18,7 +18,7 @@
     "connection",
     "string"
   ],
-  "author": "Jacek Czastkiewicz <jc@archlab.pl> (https://github.com/jczas)",
+  "author": "(https://github.com/jczas)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/nsc-c-park/mssql-connection-string/issues"
