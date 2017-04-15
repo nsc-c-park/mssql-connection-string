@@ -50,7 +50,7 @@ module.exports = function (connectionString) {
         throw new Error('Database not found');
     }
     if (!result['Password']) {
-        throw new Error('Password not found');
+        throw new Error('Password not found')
     }
 
     return {
