@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
 const parser = require('../index');
 
-describe('#createKnexSetup', () => {
+describe('#knexSetup', () => {
     it('should return knex setup', () => {
         const connectionString = "Data Source=tcp:database.com,1433;Initial Catalog=numbers;User Id=service@database.com;Password=fjsflregewbfldsfhsew3;"
         const expectedSetup = {

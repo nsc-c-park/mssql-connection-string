@@ -20,9 +20,8 @@ module.exports = function (connectionString) {
     let port;
     const dataSource = result['Data Source'];
     if (dataSource) {
-        let match;
         const regex = /.*:(.*),([0-9]+)/;
-        match = regex.exec(dataSource);
+        const match = regex.exec(dataSource);
         if (match) {
             host = match[1];
             port = match[2];
@@ -33,12 +32,25 @@ module.exports = function (connectionString) {
     let user;
     const userId = result['User Id'];
     if (userId) {
-        let match;
         const regex = /(.*)@.*/;
-        match = regex.exec(userId);
+        const match = regex.exec(userId);
         if (match) {
             user = match[1];
         }
+    }
+
+    // check if all data was found
+    if (!port || !host) {
+        throw new Error('Port or host not found');
+    }
+    if (!user) {
+        throw new Error('User not found');
+    }
+    if (!result['Initial Catalog']) {
+        throw new Error('Database not found');
+    }
+    if (!result['Password']) {
+        throw new Error('Password not found');
     }
 
     return {
