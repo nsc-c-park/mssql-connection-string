@@ -2,10 +2,11 @@
 [![Coverage Status](https://coveralls.io/repos/github/nsc-c-park/mssql-connection-string/badge.svg?branch=master)](https://coveralls.io/github/nsc-c-park/mssql-connection-string?branch=master)
 [![Code Climate](https://codeclimate.com/github/nsc-c-park/mssql-connection-string.svg?branch=master)](https://codeclimate.com/github/nsc-c-park/mssql-connection-string?branch=master)
 
-Number Formatter
+MS SQL Server connection string parser
 =========
 
-A small library that adds commas to numbers
+A small library that parses mssql connection string and returns database configuration for given libraries:
+* [knex](http://knexjs.org/)
 
 ## Installation
 
@@ -13,12 +14,25 @@ A small library that adds commas to numbers
 
 ## Usage
 
-    var numFormatter = require('mssql-connection-string');
+    const parser = require('mssql-connection-string');
 
-    var formattedNum = numFormatter(35666);
-  
-  
-  Output should be `35,666`
+    const connectionString = "Data Source=tcp:database.com,1433;Initial Catalog=numbers;User Id=service@database.com;Password=qwerty;";
+
+    const knexDb = parser(connectionString);
+
+  Result should be:
+
+        {
+            "host": "database.com",
+            "options": {
+                "database": "numbers",
+                "encrypt": true,
+                "port": "1433"
+            },
+            "password": "qwerty",
+            "user": "service"
+        }
+
 
 
 ## Tests
