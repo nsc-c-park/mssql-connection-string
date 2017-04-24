@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/nsc-c-park/mssql-connection-string.svg?branch=master)](https://travis-ci.org/nsc-c-park/mssql-connection-string)
+[![Build Status](https://ci.appveyor.com/api/projects/status/7fvfnini6t2kd7q7?svg=true)](https://ci.appveyor.com/project/jczas/mssql-connection-string)
 [![Coverage Status](https://coveralls.io/repos/github/nsc-c-park/mssql-connection-string/badge.svg?branch=master)](https://coveralls.io/github/nsc-c-park/mssql-connection-string?branch=master)
 [![Code Climate](https://codeclimate.com/github/nsc-c-park/mssql-connection-string.svg?branch=master)](https://codeclimate.com/github/nsc-c-park/mssql-connection-string?branch=master)
 [![Issue Count](https://codeclimate.com/github/nsc-c-park/mssql-connection-string/badges/issue_count.svg)](https://codeclimate.com/github/nsc-c-park/mssql-connection-string)
