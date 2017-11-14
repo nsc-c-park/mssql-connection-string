@@ -38,7 +38,7 @@ A small library that parses mssql connection string and returns database configu
 
 
 ## Tests
-
+  `npm install`
   `npm test`
 
 ## Contributing
