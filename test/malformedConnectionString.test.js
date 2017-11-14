@@ -34,14 +34,6 @@ describe('#malformedConnectionString', () => {
         }).to.throw(Error);
     });
 
-    it('should find missing user', () => {
-        const connectionString = 'Data Source=tcp:database.com,1433;Initial Catalog=numbers;User Id=database.com;Password=fjsflregewbfldsfhsew3;';
-
-        expect(() => {
-            parser(connectionString);
-        }).to.throw(Error);
-    });
-
     it('should find missing "Initial Catalog"', () => {
         const connectionString = 'Data Source=tcp:database.com,1433;Initial=numbers;User Id=service@database.com;Password=fjsflregewbfldsfhsew3;';
 
