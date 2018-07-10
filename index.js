@@ -20,11 +20,31 @@ module.exports = function (connectionString) {
     let port;
     const dataSource = result['data source'];
     if (dataSource) {
-        const regex = /.*:(.*),([0-9]+)/;
-        const match = regex.exec(dataSource);
-        if (match) {
-            host = match[1];
-            port = match[2];
+        const regexFull = /.*:(.*)/;
+        const regexHostPort = /(.*),([0-9]+)/;
+        
+        const matchFull = regexFull.exec(dataSource);
+        
+        if (matchFull) {
+            const matchHostPort1 = regexHostPort.exec(matchFull[1]);
+            if (matchHostPort1) {
+                host = matchHostPort1[1];
+                port = matchHostPort1[2];
+            }
+            else if (isNaN(matchFull[1])) {
+                
+                host = matchFull[1];
+            }
+        }
+        else{
+            const matchHostPort2 = regexHostPort.exec(dataSource);
+            if (matchHostPort2) {
+                host = matchHostPort2[1];
+                port = matchHostPort2[2];
+            }
+            else if (isNaN(dataSource)) {
+                host = datasource;
+            }
         }
     }
 
@@ -42,8 +62,8 @@ module.exports = function (connectionString) {
     }
 
     // check if all data was found
-    if (!port || !host) {
-        throw new Error('Port or host not found');
+    if (!host) {
+        throw new Error('Host not found');
     }
     if (!user) {
         throw new Error('User not found');
