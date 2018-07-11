@@ -77,7 +77,6 @@ describe('#knexSetup', () => {
             'options': {
                 'database': 'numbers',
                 'encrypt': true,
-                'port': undefined,
             },
             'password': 'fjsflregewbfldsfhsew3',
             'user': 'service',
@@ -94,7 +93,6 @@ describe('#knexSetup', () => {
             'options': {
                 'database': 'numbers',
                 'encrypt': true,
-                'port': undefined,
             },
             'password': 'fjsflregewbfldsfhsew3',
             'user': 'service',

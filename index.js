@@ -74,16 +74,21 @@ module.exports = function (connectionString) {
         throw new Error('Password not found');
     }
 
-    return {
+    var config = {
         host,
         options: {
             database: result['initial catalog'],
-            encrypt: true,
-            port: port,
+            encrypt: true
         },
         /* tslint:disable */
         password: result['password'],
         /* tslint:enable */
         user,
     };
+
+    if (port){
+        config.options.port = port;
+    }
+
+    return config;
 };
