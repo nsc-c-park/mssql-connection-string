@@ -22,7 +22,6 @@ module.exports = function (connectionString) {
     if (dataSource) {
         const regexFull = /.*:(.*)/;
         const regexHostPort = /(.*),([0-9]+)/;
-        
         const matchFull = regexFull.exec(dataSource);
         
         if (matchFull) {
@@ -38,12 +37,12 @@ module.exports = function (connectionString) {
         }
         else{
             const matchHostPort2 = regexHostPort.exec(dataSource);
-            if (matchHostPort2) {
+            if (matchHostPort2) {    
                 host = matchHostPort2[1];
                 port = matchHostPort2[2];
             }
             else if (isNaN(dataSource)) {
-                host = datasource;
+                host = dataSource;
             }
         }
     }

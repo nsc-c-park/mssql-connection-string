@@ -9,7 +9,20 @@ describe('#malformedConnectionString', () => {
             parser(connectionString);
         }).to.not.throw(Error);
     });
+    it('should allow missing protocol', () => {
+        const connectionString = 'Data Source=database.com,1433;Initial Catalog=numbers;User Id=service@database.com;Password=fjsflregewbfldsfhsew3;';
 
+        expect(() => {
+            parser(connectionString);
+        }).to.not.throw(Error);
+    });
+    it('should allow missing port and protocol', () => {
+        const connectionString = 'Data Source=database.com;Initial Catalog=numbers;User Id=service@database.com;Password=fjsflregewbfldsfhsew3;';
+
+        expect(() => {
+            parser(connectionString);
+        }).to.not.throw(Error);
+    });
     it('should find missing host', () => {
         const connectionString = 'Data Source=tcp:1433;Initial Catalog=numbers;User Id=service@database.com;Password=fjsflregewbfldsfhsew3;';
 
@@ -17,7 +30,6 @@ describe('#malformedConnectionString', () => {
             parser(connectionString);
         }).to.throw(Error);
     });
-
     it('should find missing "Data Source"', () => {
         const connectionString = 'Data=tcp:database.com,1433;Initial Catalog=numbers;User Id=service@database.com;Password=fjsflregewbfldsfhsew3;';
 
@@ -25,7 +37,6 @@ describe('#malformedConnectionString', () => {
             parser(connectionString);
         }).to.throw(Error);
     });
-
     it('should find missing "User Id"', () => {
         const connectionString = 'Data Source=tcp:database.com,1433;Initial Catalog=numbers;User=service@database.com;Password=fjsflregewbfldsfhsew3;';
 
