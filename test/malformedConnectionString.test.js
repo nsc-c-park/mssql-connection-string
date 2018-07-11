@@ -23,8 +23,15 @@ describe('#malformedConnectionString', () => {
             parser(connectionString);
         }).to.not.throw(Error);
     });
-    it('should find missing host', () => {
+    it('should find missing host with protocol', () => {
         const connectionString = 'Data Source=tcp:1433;Initial Catalog=numbers;User Id=service@database.com;Password=fjsflregewbfldsfhsew3;';
+
+        expect(() => {
+            parser(connectionString);
+        }).to.throw(Error);
+    });
+    it('should find missing host without protocol', () => {
+        const connectionString = 'Data Source=1433;Initial Catalog=numbers;User Id=service@database.com;Password=fjsflregewbfldsfhsew3;';
 
         expect(() => {
             parser(connectionString);
