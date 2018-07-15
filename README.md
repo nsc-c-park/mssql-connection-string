@@ -35,7 +35,7 @@ A small library that parses mssql connection string and returns database configu
             "user": "service"
         }
 
-
+The protocol and port in 'Data Source' are optional. If the 'User Id' contains an email, only the login will be used as user.
 
 ## Tests
   `npm install`
