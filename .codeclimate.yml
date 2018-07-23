@@ -8,3 +8,4 @@ ratings:
 
 exclude_patterns:
 - "*.peg.js"
+- "test/*.test.js"
