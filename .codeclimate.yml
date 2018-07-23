@@ -5,3 +5,6 @@ engines:
 ratings:
    paths:
    - "**.js"
+
+exclude_patterns:
+- "*.peg.js"
