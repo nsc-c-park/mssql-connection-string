@@ -101,5 +101,110 @@ describe('#knexSetup', () => {
         const result = parser(connectionString);
         expect(result).to.deep.equal(expectedSetup);
     });
+    it('should allow enclosed values in single quotes', () => {
+        const connectionString = 'Data Source=database.com;Initial Catalog=\'numbers\';User Id=service;Password=fjsflregewbfldsfhsew3;';
+        const expectedSetup = {
+            'host': 'database.com',
+            'options': {
+                'database': 'numbers',
+                'encrypt': true
+            },
+            'password': 'fjsflregewbfldsfhsew3',
+            'user': 'service',
+        };
+
+        const result = parser(connectionString);
+        expect(result).to.deep.equal(expectedSetup);
+    });
+    it('should allow enclosed values in double quotes', () => {
+        const connectionString = 'Data Source=database.com;Initial Catalog="numbers";User Id=service;Password=fjsflregewbfldsfhsew3;';
+        const expectedSetup = {
+            'host': 'database.com',
+            'options': {
+                'database': 'numbers',
+                'encrypt': true
+            },
+            'password': 'fjsflregewbfldsfhsew3',
+            'user': 'service',
+        };
+
+        const result = parser(connectionString);
+        expect(result).to.deep.equal(expectedSetup);
+    });
+    it('should allow enclosed keys in double quotes', () => {
+        const connectionString = 'Data Source=database.com;"Initial Catalog"=numbers;User Id=service;Password=fjsflregewbfldsfhsew3;';
+        const expectedSetup = {
+            'host': 'database.com',
+            'options': {
+                'database': 'numbers',
+                'encrypt': true
+            },
+            'password': 'fjsflregewbfldsfhsew3',
+            'user': 'service',
+        };
+
+        const result = parser(connectionString);
+        expect(result).to.deep.equal(expectedSetup);
+    });
+    it('should trim trailing and leading whitespace', () => {
+        const connectionString = 'Data Source=database.com;   Initial Catalog =  numbers ;User Id=service;Password=fjsflregewbfldsfhsew3;';
+        const expectedSetup = {
+            'host': 'database.com',
+            'options': {
+                'database': 'numbers',
+                'encrypt': true
+            },
+            'password': 'fjsflregewbfldsfhsew3',
+            'user': 'service',
+        };
+
+        const result = parser(connectionString);
+        expect(result).to.deep.equal(expectedSetup);
+    });
+    it('should leave trailing and leading whitespace inside quotes', () => {
+        const connectionString = 'Data Source=database.com;Initial Catalog= " numbers";User Id=service;Password=fjsflregewbfldsfhsew3;';
+        const expectedSetup = {
+            'host': 'database.com',
+            'options': {
+                'database': ' numbers',
+                'encrypt': true
+            },
+            'password': 'fjsflregewbfldsfhsew3',
+            'user': 'service',
+        };
+
+        const result = parser(connectionString);
+        expect(result).to.deep.equal(expectedSetup);
+    });
+    it('should allow quotes inside or closing a value without enclosing', () => {
+        const connectionString = 'Data Source=database.com;Initial Catalog=numbe"rs";User Id=serv\'ice\';Password=fjsflregewbfldsfhsew3;';
+        const expectedSetup = {
+            'host': 'database.com',
+            'options': {
+                'database': 'numbe"rs"',
+                'encrypt': true
+            },
+            'password': 'fjsflregewbfldsfhsew3',
+            'user': 'serv\'ice\'',
+        };
+
+        const result = parser(connectionString);
+        expect(result).to.deep.equal(expectedSetup);
+    });
+    it('should allow semicolons inside or closing a value with enclosing', () => {
+        const connectionString = 'Data Source=database.com;Initial Catalog="numbe;rs;";User Id=service;Password="fjsflreg;ewbfldsfhsew3";';
+        const expectedSetup = {
+            'host': 'database.com',
+            'options': {
+                'database': 'numbe;rs;',
+                'encrypt': true
+            },
+            'password': 'fjsflreg;ewbfldsfhsew3',
+            'user': 'service',
+        };
+
+        const result = parser(connectionString);
+        expect(result).to.deep.equal(expectedSetup);
+    });
 
 });

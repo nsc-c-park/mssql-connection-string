@@ -1,4 +1,5 @@
 'use strict';
+const parse = require('./grammar.peg.js').parse;
 
 /**
  * Create knex setup from MS SQL Server connection string
@@ -6,14 +7,11 @@
  * @return {json}
  */
 module.exports = function (connectionString) {
-    // split connection string to key=value pairs
-    const result = {};
-    connectionString.split(';').forEach((x) => {
-        const arr = x.split('=');
-        if (arr[1]) {
-            result[arr[0].toLowerCase()] = arr[1];
-        }
-    });
+    let parts = parse(connectionString);
+    const result = parts.reduce((a, p)=> {
+        a[p[0].toLowerCase()] = p[1];
+        return a;
+    }, {});
 
     // extract host and port from 'Data Source'
     let host;

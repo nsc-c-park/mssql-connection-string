@@ -1,0 +1,13 @@
+start
+  = (step)+
+  
+step
+  = key:token [ ]* '=' value:token ';' {return [key, value]}
+
+token 
+  = [ ]* t:(('"' enc:[^"]+ '"' {return enc}) / ("'" enc:[^']+ "'" {return enc}) / (text:[^;=]+ {return [text.join('').trim()]})) [ ]* {return t.join('')}
+
+  /*
+  npm install --global pegjs
+  pegjs --format commonjs --output grammar.peg.js ./grammar.peg
+  */
