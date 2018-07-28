@@ -2,10 +2,22 @@ start
   = (step)+
   
 step
-  = key:token [ ]* '=' value:token ';' {return [key, value]}
+  = key:keytoken [ ]* '=' value:valuetoken ';' {return [key, value]}
 
-token 
-  = [ ]* t:(('"' enc:[^"]+ '"' {return enc}) / ("'" enc:[^']+ "'" {return enc}) / (text:[^;=]+ {return [text.join('').trim()]})) [ ]* {return t.join('')}
+valuetoken 
+  = [ ]* t:(doublequoted / singlequoted / plainvalue) [ ]* {return t.join('')}
+
+doublequoted
+  = ('"' enc:[^"]+ '"' {return enc})
+
+singlequoted
+  = ("'" enc:[^']+ "'" {return enc})
+  
+plainvalue
+  = (text:[^;=]+ {return [text.join('').trim()]})
+
+keytoken
+  = key:(('==' {return '='}) / [^=])+ {return key.join('').trim()}
 
   /*
   npm install --global pegjs
