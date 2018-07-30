@@ -212,6 +212,6 @@ describe('#knexSetup', () => {
     it('should fail on parsing a plain value with a =', () => {
         const connectionString = 'SomeKey= va=lue;Data Source=tcp:database.com,1433;Initial Catalog=numbers;User Id=service@database.com;Password=fjsflregewbfldsfhsew3;';
         const result = ()=>parser(connectionString);
-        expect(result).to.throw(/^SyntaxError.*/);
+        expect(result).to.throw(/^Expected ";"/);
     });
 });
