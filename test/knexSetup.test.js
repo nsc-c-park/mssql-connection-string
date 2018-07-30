@@ -131,21 +131,6 @@ describe('#knexSetup', () => {
         const result = parser(connectionString);
         expect(result).to.deep.equal(expectedSetup);
     });
-    it('should allow enclosed keys in double quotes', () => {
-        const connectionString = 'Data Source=database.com;"Initial Catalog"=numbers;User Id=service;Password=fjsflregewbfldsfhsew3;';
-        const expectedSetup = {
-            'host': 'database.com',
-            'options': {
-                'database': 'numbers',
-                'encrypt': true
-            },
-            'password': 'fjsflregewbfldsfhsew3',
-            'user': 'service',
-        };
-
-        const result = parser(connectionString);
-        expect(result).to.deep.equal(expectedSetup);
-    });
     it('should trim trailing and leading whitespace', () => {
         const connectionString = 'Data Source=database.com;   Initial Catalog =  numbers ;User Id=service;Password=fjsflregewbfldsfhsew3;';
         const expectedSetup = {
@@ -207,4 +192,26 @@ describe('#knexSetup', () => {
         expect(result).to.deep.equal(expectedSetup);
     });
 
+    it('should successfully parse a key with ==', () => {
+        const connectionString = 'Some==Key= value;Data Source=tcp:database.com,1433;Initial Catalog=numbers;User Id=service@database.com;Password=fjsflregewbfldsfhsew3;';
+        const expectedSetup = {
+            'host': 'database.com',
+            'options': {
+                'database': 'numbers',
+                'encrypt': true,
+                'port': '1433',
+            },
+            'password': 'fjsflregewbfldsfhsew3',
+            'user': 'service',
+        };
+
+        const result = parser(connectionString);
+        expect(result).to.deep.equal(expectedSetup);
+    });
+
+    it('should fail on parsing a plain value with a =', () => {
+        const connectionString = 'SomeKey= va=lue;Data Source=tcp:database.com,1433;Initial Catalog=numbers;User Id=service@database.com;Password=fjsflregewbfldsfhsew3;';
+        const result = ()=>parser(connectionString);
+        expect(result).to.throw(/^Expected ";"/);
+    });
 });
