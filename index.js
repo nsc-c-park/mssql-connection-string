@@ -12,27 +12,16 @@ module.exports = function (connectionString) {
     // extract host and port from 'Data Source'
     let host;
     let port;
-    ({ host, port } = extractFromDataSource(result));
+    ({host, port} = extractFromDataSource(result));
 
     // extract user from 'User Id'
     let user;
     user = extractFromUserId(result);
 
     // check if all data was found
-    if (!host) {
-        throw new Error('Host not found');
-    }
-    if (!user) {
-        throw new Error('User not found');
-    }
-    if (!result['initial catalog']) {
-        throw new Error('Database not found');
-    }
-    if (!result['password']) {
-        throw new Error('Password not found');
-    }
+    checkExtractedData(host, user, result);
 
-    var config = {
+    let config = {
         host,
         options: {
             database: result['initial catalog'],
@@ -42,7 +31,7 @@ module.exports = function (connectionString) {
         user,
     };
 
-    if (port){
+    if (port) {
         config.options.port = port;
     }
 
@@ -57,8 +46,7 @@ function extractFromUserId(result) {
         const match = regex.exec(userId);
         if (match) {
             user = match[1];
-        }
-        else {
+        } else {
             user = userId;
         }
     }
@@ -74,27 +62,25 @@ function extractFromDataSource(result) {
         const regexHostPort = /(.*),([0-9]+)/;
         const matchFull = regexFull.exec(dataSource);
         if (matchFull) {
-            const matchHostPort1 = regexHostPort.exec(matchFull[1]);
-            if (matchHostPort1) {
-                host = matchHostPort1[1];
-                port = matchHostPort1[2];
-            }
-            else if (isNaN(matchFull[1])) {
+            const matchHostPort = regexHostPort.exec(matchFull[1]);
+            if (matchHostPort) {
+                host = matchHostPort[1];
+                port = matchHostPort[2];
+            } else if (isNaN(matchFull[1])) {
                 host = matchFull[1];
             }
         }
         else {
-            const matchHostPort2 = regexHostPort.exec(dataSource);
-            if (matchHostPort2) {
-                host = matchHostPort2[1];
-                port = matchHostPort2[2];
-            }
-            else if (isNaN(dataSource)) {
+            const matchHostPort = regexHostPort.exec(dataSource);
+            if (matchHostPort) {
+                host = matchHostPort[1];
+                port = matchHostPort[2];
+            } else if (isNaN(dataSource)) {
                 host = dataSource;
             }
         }
     }
-    return { host, port };
+    return {host, port};
 }
 
 function parseConnectionString(connectionString) {
@@ -104,4 +90,20 @@ function parseConnectionString(connectionString) {
         return a;
     }, {});
     return result;
+}
+
+
+function checkExtractedData(host, user, result) {
+    if (!host) {
+        throw new Error('Host not found');
+    }
+    if (!user) {
+        throw new Error('User not found');
+    }
+    if (!result['initial catalog']) {
+        throw new Error('Database not found');
+    }
+    if (!result['password']) {
+        throw new Error('Password not found');
+    }
 }
