@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const parser = require('../lib/index');
+const parser = require('../src/index');
 
 describe('#malformedConnectionString', () => {
     it('should allow missing port', () => {
