@@ -38,3 +38,6 @@ jspm_packages
 
 # Coveralls configuration
 .coveralls.yml
+
+# IntelliJ
+.idea
