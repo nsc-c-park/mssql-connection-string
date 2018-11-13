@@ -22,7 +22,8 @@ module.exports = function (connectionString) {
     checkExtractedData(host, user, result);
 
     let config = {
-        host,
+        host, server: host,
+        database: result['initial catalog'],
         options: {
             database: result['initial catalog'],
             encrypt: true
@@ -56,7 +57,7 @@ function extractFromUserId(result) {
 function extractFromDataSource(result) {
     let host;
     let port;
-    const dataSource = result['data source'];
+    const dataSource = result['data source'] || result['server'];
     if (dataSource) {
         const regexFull = /.*:(.*)/;
         const regexHostPort = /(.*),([0-9]+)/;
