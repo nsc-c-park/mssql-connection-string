@@ -12,11 +12,10 @@ module.exports = function (connectionString) {
     // extract host and port from 'Data Source'
     let host;
     let port;
-    ({host, port} = extractFromDataSource(result));
+    ({host, port} = extractHostAndPortFromDataSource(result));
 
     // extract user from 'User Id'
-    let user;
-    user = extractFromUserId(result);
+    const user = extractFromUserId(result);
 
     // check if all data was found
     checkExtractedData(host, user, result);
@@ -53,31 +52,32 @@ function extractFromUserId(result) {
     return user;
 }
 
-function extractFromDataSource(result) {
+let extractedHostAndPort = function (data) {
+    let host;
+    let port;
+    const regexHostPort = /(.*),([0-9]+)/;
+    const matchHostPort = regexHostPort.exec(data);
+    if (matchHostPort) {
+        host = matchHostPort[1];
+        port = matchHostPort[2];
+    } else if (isNaN(data)) {
+        host = data;
+    }
+    return {host, port};
+};
+
+function extractHostAndPortFromDataSource(result) {
     let host;
     let port;
     const dataSource = result['data source'];
     if (dataSource) {
         const regexFull = /.*:(.*)/;
-        const regexHostPort = /(.*),([0-9]+)/;
         const matchFull = regexFull.exec(dataSource);
         if (matchFull) {
-            const matchHostPort = regexHostPort.exec(matchFull[1]);
-            if (matchHostPort) {
-                host = matchHostPort[1];
-                port = matchHostPort[2];
-            } else if (isNaN(matchFull[1])) {
-                host = matchFull[1];
-            }
+            ({host, port} = extractedHostAndPort(matchFull[1]));
         }
         else {
-            const matchHostPort = regexHostPort.exec(dataSource);
-            if (matchHostPort) {
-                host = matchHostPort[1];
-                port = matchHostPort[2];
-            } else if (isNaN(dataSource)) {
-                host = dataSource;
-            }
+            ({host, port} = extractedHostAndPort(dataSource));
         }
     }
     return {host, port};
