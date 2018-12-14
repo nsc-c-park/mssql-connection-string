@@ -6,6 +6,8 @@ describe('#knexSetup', () => {
         const connectionString = 'Data Source=tcp:database.com,1433;Initial Catalog=numbers;User Id=service@database.com;Password=fjsflregewbfldsfhsew3;';
         const expectedSetup = {
             'host': 'database.com',
+            'server': 'database.com',
+            'database': 'numbers',
             'options': {
                 'database': 'numbers',
                 'encrypt': true,
@@ -23,6 +25,8 @@ describe('#knexSetup', () => {
         const connectionString = 'Data souRCE=tcp:database.com,1433;Initial CataloG=numbers;User ID=service@database.com;PasswoRD=fjsflregewbfldsfhsew3;';
         const expectedSetup = {
             'host': 'database.com',
+            'server': 'database.com',
+            'database': 'numbers',
             'options': {
                 'database': 'numbers',
                 'encrypt': true,
@@ -40,6 +44,8 @@ describe('#knexSetup', () => {
         const connectionString = 'Data souRCE=tcp:database.com,1433;Initial CataloG=numbers;User ID=service;PasswoRD=fjsflregewbfldsfhsew3;';
         const expectedSetup = {
             'host': 'database.com',
+            'server': 'database.com',
+            'database': 'numbers',
             'options': {
                 'database': 'numbers',
                 'encrypt': true,
@@ -57,6 +63,8 @@ describe('#knexSetup', () => {
         const connectionString = 'Data Source=database.com,1433;Initial Catalog=numbers;User Id=service@database.com;Password=fjsflregewbfldsfhsew3;';
         const expectedSetup = {
             'host': 'database.com',
+            'server': 'database.com',
+            'database': 'numbers',
             'options': {
                 'database': 'numbers',
                 'encrypt': true,
@@ -74,6 +82,8 @@ describe('#knexSetup', () => {
         const connectionString = 'Data Source=tcp:database.com;Initial Catalog=numbers;User Id=service@database.com;Password=fjsflregewbfldsfhsew3;';
         const expectedSetup = {
             'host': 'database.com',
+            'server': 'database.com',
+            'database': 'numbers',
             'options': {
                 'database': 'numbers',
                 'encrypt': true,
@@ -90,6 +100,8 @@ describe('#knexSetup', () => {
         const connectionString = 'Data Source=database.com;Initial Catalog=numbers;User Id=service@database.com;Password=fjsflregewbfldsfhsew3;';
         const expectedSetup = {
             'host': 'database.com',
+            'server': 'database.com',
+            'database': 'numbers',
             'options': {
                 'database': 'numbers',
                 'encrypt': true,
@@ -105,6 +117,8 @@ describe('#knexSetup', () => {
         const connectionString = 'Data Source=database.com;Initial Catalog=\'numbers\';User Id=service;Password=fjsflregewbfldsfhsew3;';
         const expectedSetup = {
             'host': 'database.com',
+            'server': 'database.com',
+            'database': 'numbers',
             'options': {
                 'database': 'numbers',
                 'encrypt': true
@@ -120,6 +134,8 @@ describe('#knexSetup', () => {
         const connectionString = 'Data Source=database.com;Initial Catalog="numbers";User Id=service;Password=fjsflregewbfldsfhsew3;';
         const expectedSetup = {
             'host': 'database.com',
+            'server': 'database.com',
+            'database': 'numbers',
             'options': {
                 'database': 'numbers',
                 'encrypt': true
@@ -135,6 +151,8 @@ describe('#knexSetup', () => {
         const connectionString = 'Data Source=database.com;   Initial Catalog =  numbers ;User Id=service;Password=fjsflregewbfldsfhsew3;';
         const expectedSetup = {
             'host': 'database.com',
+            'server': 'database.com',
+            'database': 'numbers',
             'options': {
                 'database': 'numbers',
                 'encrypt': true
@@ -150,6 +168,8 @@ describe('#knexSetup', () => {
         const connectionString = 'Data Source=database.com;Initial Catalog= " numbers";User Id=service;Password=fjsflregewbfldsfhsew3;';
         const expectedSetup = {
             'host': 'database.com',
+            'server': 'database.com',
+            'database': ' numbers',
             'options': {
                 'database': ' numbers',
                 'encrypt': true
@@ -165,6 +185,8 @@ describe('#knexSetup', () => {
         const connectionString = 'Data Source=database.com;Initial Catalog=numbe"rs";User Id=serv\'ice\';Password=fjsflregewbfldsfhsew3;';
         const expectedSetup = {
             'host': 'database.com',
+            'server': 'database.com',
+            'database': 'numbe"rs"',
             'options': {
                 'database': 'numbe"rs"',
                 'encrypt': true
@@ -180,6 +202,8 @@ describe('#knexSetup', () => {
         const connectionString = 'Data Source=database.com;Initial Catalog="numbe;rs;";User Id=service;Password="fjsflreg;ewbfldsfhsew3";';
         const expectedSetup = {
             'host': 'database.com',
+            'server': 'database.com',
+            'database': 'numbe;rs;',
             'options': {
                 'database': 'numbe;rs;',
                 'encrypt': true
@@ -196,6 +220,8 @@ describe('#knexSetup', () => {
         const connectionString = 'Some==Key= value;Data Source=tcp:database.com,1433;Initial Catalog=numbers;User Id=service@database.com;Password=fjsflregewbfldsfhsew3;';
         const expectedSetup = {
             'host': 'database.com',
+            'server': 'database.com',
+            'database': 'numbers',
             'options': {
                 'database': 'numbers',
                 'encrypt': true,
