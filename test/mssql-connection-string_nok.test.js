@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const parser = require('../src/index');
+const parser = require('../src/mssql-connection-string');
 
 describe('#malformedConnectionString', () => {
     it('should allow missing port', () => {
