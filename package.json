@@ -19,7 +19,9 @@
     "knex",
     "bookshelf",
     "connection",
-    "string"
+    "string",
+    "typescript",
+    "javascript"
   ],
   "author": "(https://github.com/jczas)",
   "license": "MIT",

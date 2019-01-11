@@ -16,13 +16,23 @@ A small library that parses mssql connection string and returns database configu
 
 ## Usage
 
+##### JavaScript:
+
     const parser = require('mssql-connection-string');
 
     const connectionString = "Data Source=tcp:database.com,1433;Initial Catalog=numbers;User Id=service@database.com;Password=qwerty;";
 
     const knexDb = parser(connectionString);
 
-  Result should be:
+##### TypeScript:
+
+    import parse from 'mssql-connection-string';
+
+    const connectionString = "Data Source=tcp:database.com,1433;Initial Catalog=numbers;User Id=service@database.com;Password=qwerty;";
+
+    const knexDb = parser(connectionString);
+
+##### Result should be:
 
         {
             "host": "database.com",
