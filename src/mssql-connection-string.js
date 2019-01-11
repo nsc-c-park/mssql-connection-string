@@ -1,12 +1,12 @@
 'use strict';
-const parse = require('./grammar.peg.js').parse;
+const peg$parse = require('./grammar.peg.js').parse;
 
 /**
  * Create knex setup from MS SQL Server connection string
  * @param {string} connectionString
  * @return {json}
  */
-module.exports = function (connectionString) {
+module.exports = function parse(connectionString) {
     const result = parseConnectionString(connectionString);
 
     // extract host and port from 'Data Source'
@@ -36,7 +36,7 @@ module.exports = function (connectionString) {
     }
 
     return config;
-};
+}
 
 function extractFromUserId(result) {
     let user;
@@ -53,7 +53,7 @@ function extractFromUserId(result) {
     return user;
 }
 
-let extractedHostAndPort = function (data) {
+function extractedHostAndPort(data) {
     let host;
     let port;
     const regexHostPort = /(.*),([0-9]+)/;
@@ -65,7 +65,7 @@ let extractedHostAndPort = function (data) {
         host = data;
     }
     return {host, port};
-};
+}
 
 function extractHostAndPortFromDataSource(result) {
     let host;
@@ -85,14 +85,13 @@ function extractHostAndPortFromDataSource(result) {
 }
 
 function parseConnectionString(connectionString) {
-    let parts = parse(connectionString);
+    let parts = peg$parse(connectionString);
     const result = parts.reduce((a, p) => {
         a[p[0].toLowerCase()] = p[1];
         return a;
     }, {});
     return result;
 }
-
 
 function checkExtractedData(host, user, result) {
     if (!host) {
