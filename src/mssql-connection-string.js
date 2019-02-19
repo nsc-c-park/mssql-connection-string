@@ -36,7 +36,7 @@ module.exports = function parse(connectionString) {
     }
 
     return config;
-}
+};
 
 function extractFromUserId(result) {
     let user;
