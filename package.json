@@ -1,6 +1,6 @@
 {
   "name": "mssql-connection-string",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Module to parse MS SQL Server connection string",
   "main": "src/mssql-connection-string.js",
   "types": "types/mssql-connection-string.d.ts",
