@@ -27,7 +27,7 @@ A small library that parses mssql connection string and returns database configu
 
 ##### TypeScript:
 
-    import parse from 'mssql-connection-string';
+    import parser from 'mssql-connection-string';
 
     const connectionString = "Data Source=tcp:database.com,1433;Initial Catalog=numbers;User Id=service@database.com;Password=qwerty;";
 
