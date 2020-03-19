@@ -34,6 +34,6 @@
     "coveralls": "3.0.3",
     "eslint": "5.16.0",
     "istanbul": "0.4.5",
-    "mocha": "6.0.2"
+    "mocha": "7.1.1"
   }
 }
